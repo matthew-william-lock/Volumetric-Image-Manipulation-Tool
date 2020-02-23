@@ -6,6 +6,7 @@
 #include <cstring>
 #include <sstream>
 #include <vector>
+#include<string.h>
 
 class VolImage {
 
