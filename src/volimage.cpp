@@ -5,7 +5,7 @@ VolImage::VolImage():width(0),height(0){};
 
 //Default destructor
 VolImage::~VolImage(){
-    std::cout<<"VolImage object deleted"<<std::endl;
+    // std::cout<<"VolImage object deleted"<<std::endl;
 };
 
 
@@ -120,3 +120,15 @@ void VolImage::extract(int sliceId, std::string output_prefix){
     }
     binaryFile.close();
 }
+
+ int VolImage::volImageSize(void){
+    using namespace std;
+    
+    int bytes=sizeof(unsigned char [width])*height*slices.size();
+    bytes+=sizeof(unsigned char *)*height*slices.size();
+    bytes+=sizeof(unsigned char *[height])*slices.size();
+    bytes+=sizeof(char **)*slices.size();
+
+
+    return bytes;
+ };

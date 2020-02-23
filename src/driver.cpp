@@ -85,5 +85,8 @@ int main(int argc, char* argv[])
             }            
         }
     }
+
+    cout<<"Number of bytes required: "<<data.volImageSize()<<endl;
+
     return 0;
 }
