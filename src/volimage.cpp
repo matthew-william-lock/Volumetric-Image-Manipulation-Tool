@@ -6,6 +6,15 @@ VolImage::VolImage():width(0),height(0){};
 //Default destructor
 VolImage::~VolImage(){
     // std::cout<<"VolImage object deleted"<<std::endl;
+    for (size_t i = 0; i < slices.size(); i++)
+    {        
+        for (size_t j = 0; j < height; j++)
+        {
+            delete[] slices.at(i)[j];/* code */
+        }
+        delete[] slices.at(i);
+    }
+    
 };
 
 
@@ -74,10 +83,8 @@ bool VolImage::readImages(std::string baseName){
                    
             }
             rowPtr[y]=row;
-
         }
         slices.push_back(rowPtr);   
-
     }
     // cout << endl << "Total count: " << j << endl<<endl; 
 };
@@ -122,13 +129,10 @@ void VolImage::extract(int sliceId, std::string output_prefix){
 }
 
  int VolImage::volImageSize(void){
-    using namespace std;
-    
+    using namespace std;    
     int bytes=sizeof(unsigned char [width])*height*slices.size();
     bytes+=sizeof(unsigned char *)*height*slices.size();
     bytes+=sizeof(unsigned char *[height])*slices.size();
     bytes+=sizeof(char **)*slices.size();
-
-
     return bytes;
  };
