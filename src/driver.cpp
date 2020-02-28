@@ -14,9 +14,9 @@ int main(int argc, char* argv[])
 {
     using namespace std;
 
-    if (argc<2)
+    if (argc<3)
     {
-        cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name]"<<endl;
+        cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name] [-g i output_file_name]"<<endl;
         cout<<"usage: volimage: error: too few arguments"<<endl;
         return 1; 
     } 
@@ -25,7 +25,8 @@ int main(int argc, char* argv[])
     ifstream in(filename);
     if (!in)
     {
-        cout<<"Enter a valid imageBase"<<endl;
+        cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name] [-g i output_file_name]"<<endl;
+        cout<<"usage: volimage: error: enter a valid imageBase"<<endl;
         return false; 
     }
 
@@ -35,28 +36,28 @@ int main(int argc, char* argv[])
 
     if (argc>6)
     {
-        cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name]"<<endl;
+        cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name] [-g i output_file_name]"<<endl; 
         cout<<"usage: volimage: error: too many arguments"<<endl;
         return 1;
     }
 
     if (argc>2)
     {
-        if (string(argv[2])!="-d" && string(argv[2])!="-x")
+        if (string(argv[2])!="-d" && string(argv[2])!="-x" && string(argv[2])!="-g")
         {
-            cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name]"<<endl;
+            cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name] [-g i output_file_name]"<<endl;
             cout<<"usage: volimage: error: no valid "<<string(argv[2])<<" option"<<endl;
             return 1;
         }
         if (!isNumber(string(argv[3])))
         {
-            cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name]"<<endl;
+            cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name] [-g i output_file_name]"<<endl;
             cout<<"usage: volimage: error: "<<string(argv[3])<<" is not a valid argument"<<endl;
             return 1;
         }
         if (argc==6 && !isNumber(string(argv[4])))
         {
-            cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name]"<<endl;
+            cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name] [-g i output_file_name]"<<endl;
             cout<<"usage: volimage: error: "<<string(argv[4])<<" is not a valid argument"<<endl;
             return 1;
         }
@@ -65,7 +66,7 @@ int main(int argc, char* argv[])
             {
                 if (argc<6)
                 {
-                    cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name]"<<endl;
+                    cout<<"usage: volimage <imageBase> [-d i j output_file_name]"<<endl;
                     cout<<"usage: volimage: error: too few arguments for -d"<<endl;
                     return 0;
                 }              
@@ -76,11 +77,22 @@ int main(int argc, char* argv[])
             {
                 if (argc>5)
                 {
-                    cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name]"<<endl;
+                    cout<<"usage: volimage <imageBase> [-x i output_file_name]"<<endl;
                     cout<<"usage: volimage: error: too many arguments for -x"<<endl;
                     return 0;
                 } 
                 data.extract(stoi(string(argv[3])),string(argv[4]));
+                return 0;
+            } 
+            else if(string(argv[2])=="-g")
+            {
+                if (argc>5)
+                {
+                    cout<<"usage: volimage <imageBase> [-g i output_file_name]"<<endl;
+                    cout<<"usage: volimage: error: too many arguments for -x"<<endl;
+                    return 0;
+                } 
+                data.slice(stoi(string(argv[3])),string(argv[4]));
                 return 0;
             }            
         }

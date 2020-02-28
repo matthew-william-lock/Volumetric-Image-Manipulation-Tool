@@ -5,7 +5,7 @@ VolImage::VolImage():width(0),height(0){};
 
 //Default destructor
 VolImage::~VolImage(){
-    // std::cout<<"VolImage object deleted"<<std::endl;
+    std::cout<<"Clearing dynamically located memory"<<std::endl;
     for (size_t i = 0; i < slices.size(); i++)
     {        
         for (size_t j = 0; j < height; j++)
@@ -61,6 +61,8 @@ bool VolImage::readImages(std::string baseName){
     unsigned char value;
     char buf[sizeof(unsigned char)];
 
+    cout<<"Reading raw file"<<endl;
+
     for (size_t i = 0; i < numberofImages ; i++)
     {
         filename = "../Files/brain_mri_raws/"+baseName + to_string(i)+".raw";
@@ -98,6 +100,9 @@ void VolImage::diffmap(int sliceI, int sliceJ, std::string output_prefix){
     {
         cout<<"Failed to generate output file, check that bin file exists."<<endl;
     }
+
+        cout<<"Creating difference map"<<endl;
+    
     for (size_t y = 0; y < height; y++)
     {
         for (size_t x = 0; x < width; x++)
@@ -118,11 +123,35 @@ void VolImage::extract(int sliceId, std::string output_prefix){
     {
         cout<<"Failed to generate output file, check that bin file exists."<<endl;
     }
+
+    cout<<"Extracting raw file"<<endl;
+
     for (size_t y = 0; y < height; y++)
     {
         for (size_t x = 0; x < width; x++)
         {
             binaryFile.write ((char*)&slices.at(sliceId)[y][x], sizeof (unsigned char));
+        }
+    }
+    binaryFile.close();
+}
+
+void VolImage::slice(int row,std::string output_prefix){
+    using namespace std;
+    ofstream binaryFile ("../bin/"+output_prefix+".raw", ios::out | ios::binary);
+
+    if(!binaryFile)
+    {
+        cout<<"Failed to generate output file, check that bin file exists."<<endl;
+    }
+
+    cout<<"Extracting top row from each slice"<<endl;
+
+    for (size_t y = 0; y < slices.size(); y++)
+    {
+        for (size_t x = 0; x < width; x++)
+        {
+            binaryFile.write ((char*)&slices.at(y)[row][x], sizeof (unsigned char));
         }
     }
     binaryFile.close();
