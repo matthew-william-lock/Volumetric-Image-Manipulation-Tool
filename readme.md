@@ -30,3 +30,6 @@ Optional arguments:
 | :------------------------ | :-------------|
 | -d i j output_file_name | difference imaging mage on images i and j where output_file_name = i-j
 | -x i output_file_name | image extraction of image i in set to output_file_name
+| -g i output_file_name | slice extraction of row i from all the images in the set to output_file_name
+
+Note: All output images are written to bin file
