@@ -159,9 +159,9 @@ void VolImage::slice(int row,std::string output_prefix){
 
  int VolImage::volImageSize(void){
     using namespace std;    
-    int bytes=sizeof(unsigned char [width])*height*slices.size();
+    int bytes=0;
+    bytes=sizeof(unsigned char [width])*height*slices.size(); // For bytes read from rawfile
     bytes+=sizeof(unsigned char *)*height*slices.size();
-    bytes+=sizeof(unsigned char *[height])*slices.size();
     bytes+=sizeof(char **)*slices.size();
     return bytes;
  };
