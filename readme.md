@@ -14,7 +14,7 @@ make
 **Step 2:** Run VolImage
 ```
 cd src
-volimage <imageBase> [-d i j output_file_name] [-x i output_file_name] [-g i output_file_name]
+./volimage <imageBase> [-d i j output_file_name] [-x i output_file_name] [-g i output_file_name]
 ```
 
 # Usage
