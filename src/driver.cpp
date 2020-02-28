@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 {
     using namespace std;
 
-    if (argc<3)
+    if (argc<2)
     {
         cout<<"usage: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name] [-g i output_file_name]"<<endl;
         cout<<"usage: volimage: error: too few arguments"<<endl;
