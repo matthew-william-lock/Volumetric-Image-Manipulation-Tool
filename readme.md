@@ -10,6 +10,7 @@ Functionality includes:
 **volimage.h**: Defines the volimage class
 **volimage.cpp**: Implements the volimage class
 
+## Installation
 **Step 1:** Compile VolImage
 ```
 cd src
