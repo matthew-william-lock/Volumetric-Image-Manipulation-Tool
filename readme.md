@@ -28,3 +28,5 @@ imageBase           prefix for the file sequence
 Optional arguments:
 | Parameter                 | Description   |	
 | :------------------------ | :-------------|
+| -d i j output_file_name | difference imaging mage on images i and j where output_file_name = i-j
+| -x i output_file_name | image extraction of image i in set to output_file_name
