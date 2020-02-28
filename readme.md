@@ -5,6 +5,11 @@ Functionality includes:
 - Difference imaging
 - Slice extraction
 
+## Source files
+**driver.cpp:** : Used to implement functionality in volimage
+**volimage.h**: Defines the volimage class
+**volimage.cpp**: Implements the volimage class
+
 **Step 1:** Compile VolImage
 ```
 cd src
